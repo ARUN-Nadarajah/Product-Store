@@ -2,12 +2,14 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import {Bars3Icon,XMarkIcon,BellIcon,} from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+
 
 const navigation = [
   { name: 'Dashboard', href: '/', current: true },
   { name: 'Team', href: '/team', current: false },
   { name: 'products', href: '/products', current: false },
-  { name: 'cart', href: '/cart', current: false },
 ]
 
 function classNames(...classes: (string | undefined | false)[]): string {
@@ -55,6 +57,9 @@ export default function Navbar() {
             </div>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <Link to="/shopping">
+                 <FontAwesomeIcon icon={faCartShopping} size="lg" style={{ color: "#63E6BE", cursor: "pointer" }} />
+                </Link>
             <button
               type="button"
               className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
