@@ -1,12 +1,13 @@
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import {Bars3Icon,XMarkIcon,BellIcon,} from '@heroicons/react/24/outline'
+import { Link } from 'react-router-dom'
 
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
+  { name: 'Dashboard', href: '/', current: true },
+  { name: 'Team', href: '/team', current: false },
+  { name: 'products', href: '/products', current: false },
+  { name: 'cart', href: '/cart', current: false },
 ]
 
 function classNames(...classes: (string | undefined | false)[]): string {
@@ -38,9 +39,9 @@ export default function Navbar() {
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
                 {navigation.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
-                    href={item.href}
+                    to={item.href}
                     aria-current={item.current ? 'page' : undefined}
                     className={classNames(
                       item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
@@ -48,7 +49,7 @@ export default function Navbar() {
                     )}
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
