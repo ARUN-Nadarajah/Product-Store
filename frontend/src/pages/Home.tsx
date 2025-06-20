@@ -33,24 +33,30 @@ export default function Shopping() {
   }, []);
 
   const handleDelete = async (id: string) => {
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this product?"
-    );
-    if (!confirmed) return;
+  const confirmed = window.confirm(
+    "Are you sure you want to delete this product?"
+  );
+  if (!confirmed) return;
 
-    try {
-      const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/products/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
-      if (res.ok) setProducts(products.filter((p) => p._id !== id));
-      else console.error("Failed to delete product");
-    } catch (error) {
-      console.error("Delete error:", error);
+  try {
+    const baseUrl = import.meta.env.VITE_API_URL || "";
+    const url = `${baseUrl}/api/products/${id}`;
+    console.log("Deleting product at:", url);
+
+    const res = await fetch(url, {
+      method: "DELETE",
+    });
+
+    if (res.ok) {
+      setProducts(products.filter((p) => p._id !== id));
+      console.log("Delete successful");
+    } else {
+      console.error("Failed to delete product, status:", res.status);
     }
-  };
+  } catch (error) {
+    console.error("Delete error:", error);
+  }
+};
 
   if (loading)
     return (
