@@ -3,8 +3,9 @@ import dotenv from "dotenv";
 import cors from "cors"; 
 import connectDB from "./config/db.js";
 import productRoute from "./routes/productRoute.js";
+import path from "path";
 
-dotenv.config(); // should come early
+dotenv.config(); 
 
 const app = express();
 
@@ -13,10 +14,16 @@ app.use(cors({
   credentials: true
 }));
 
+const __dirname = path.resolve();
+
+if(process.env.NODE_ENV === "production"){
+  app.use(express.static(path.join(__dirname, "/frontend/dist")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+  });
+};
+
 app.use(express.json());
-
-console.log("MONGO_URL:", process.env.MONGO_URL);
-
 app.use("/api/products", productRoute);
 
 app.listen(process.env.PORT, () => {

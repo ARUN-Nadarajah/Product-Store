@@ -1,9 +1,8 @@
 import Home from "./pages/Home.tsx";
-import Shopping from "./pages/shopping.tsx";
-import Team from "./pages/Team.tsx";
-import Products from "./pages/Products.tsx";
+import Update from "./pages/update.tsx";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/navbar";
+import AddProduct from "./pages/addProduct.tsx";
 import "./App.css";
 
 function App() {
@@ -12,9 +11,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/shopping" element={<Shopping />} />
-        <Route path="/team" element={<Team />} />
-        <Route path="/products" element={<Products />} />
+        <Route path="/update/:id" element={<Update />} />
+        <Route path="/addProduct" element={<AddProduct />} />
       </Routes>
     </>
   );
