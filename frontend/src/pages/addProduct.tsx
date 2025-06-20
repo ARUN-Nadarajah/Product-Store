@@ -1,67 +1,75 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 type Product = {
-  name: string
-  price: string
-  image: string
-  description: string
-}
+  name: string;
+  price: string;
+  image: string;
+  description: string;
+};
 
 export default function AddProduct() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [product, setProduct] = useState<Product>({
-    name: '',
-    price: '',
-    image: '',
-    description: '',
-  })
-  const [error, setError] = useState('')
+    name: "",
+    price: "",
+    image: "",
+    description: "",
+  });
+  const [error, setError] = useState("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
 
-    if (name === 'price') {
-      // Allow only numbers and one optional decimal point
-      if (!/^\d*\.?\d*$/.test(value)) return
+    if (name === "price") {
+      // Allow only valid numeric input with up to 2 decimal places
+      if (!/^\d*\.?\d{0,2}$/.test(value)) return;
     }
 
-    setProduct((prev) => ({ ...prev, [name]: value }))
-  }
+    setProduct((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError('')
+    e.preventDefault();
+    setError("");
 
-    // Validate price
-    const priceNumber = Number(product.price)
-    if (!product.price || isNaN(priceNumber) || priceNumber <= 0) {
-      setError('Price must be a positive number.')
-      return
+    const priceNumber = Number(product.price);
+
+    if (
+      !product.price ||
+      isNaN(priceNumber) ||
+      priceNumber <= 0 ||
+      !/^\d+(\.\d{1,2})?$/.test(product.price)
+    ) {
+      setError("Price must be a positive number with up to 2 decimal places.");
+      return;
     }
 
+    const baseUrl = import.meta.env.VITE_API_URL || "";
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch(`${baseUrl}/api/products`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...product,
-          price: priceNumber, // Convert to number before sending
+          price: priceNumber,
         }),
-      })
+      });
 
       if (res.ok) {
-        window.alert('✅ Product added successfully!')
-        navigate('/')
+        window.alert("✅ Product added successfully!");
+        navigate("/");
       } else {
-        const data = await res.json()
-        throw new Error(data.message || 'Adding product failed')
+        const data = await res.json();
+        throw new Error(data.message || "Adding product failed");
       }
     } catch (err: any) {
-      setError(err.message || 'Something went wrong while adding.')
+      setError(err.message || "Something went wrong while adding.");
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 flex items-center justify-center p-6">
@@ -126,5 +134,5 @@ export default function AddProduct() {
         </form>
       </div>
     </div>
-  )
+  );
 }

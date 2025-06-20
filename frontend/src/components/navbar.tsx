@@ -1,21 +1,25 @@
-import { useEffect, useState } from 'react'
-import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Link } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
+import { useEffect, useState } from "react";
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+} from "@headlessui/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 
 export default function Navbar() {
-  const [darkMode, setDarkMode] = useState(false)
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    const root = window.document.documentElement
+    const root = window.document.documentElement;
     if (darkMode) {
-      root.classList.add('dark')
+      root.classList.add("dark");
     } else {
-      root.classList.remove('dark')
+      root.classList.remove("dark");
     }
-  }, [darkMode])
+  }, [darkMode]);
 
   return (
     <Disclosure as="nav" className="bg-gray-800 dark:bg-gray-900 shadow-lg">
@@ -34,7 +38,9 @@ export default function Navbar() {
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex items-center">
               <Link to="/">
-              <span className="text-white dark:text-gray-200 text-xl font-bold">Product Store</span>
+                <span className="text-white dark:text-gray-200 text-xl font-bold">
+                  Product Store
+                </span>
               </Link>
             </div>
           </div>
@@ -49,7 +55,7 @@ export default function Navbar() {
               <FontAwesomeIcon icon={darkMode ? faSun : faMoon} size="lg" />
             </button>
             <Link
-              to="/add-product"
+              to="/addProduct"
               className="text-white hover:text-indigo-400 transition"
               title="Add Product"
             >
@@ -63,5 +69,5 @@ export default function Navbar() {
         <div className="px-2 pb-3 pt-2">{/* Mobile nav if needed */}</div>
       </DisclosurePanel>
     </Disclosure>
-  )
+  );
 }
