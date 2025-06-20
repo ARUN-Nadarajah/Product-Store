@@ -1,9 +1,17 @@
-# UrbanGreen – Eco-Friendly E-Commerce Store 🌿
+# 🛒 Product Store – Full Stack App with React & Node.js
 
-A backend API for an eco-friendly e-commerce platform promoting sustainable products.  
-(Currently under active development — frontend coming soon.)
+A complete full-stack product management application for showcasing and managing products.  
+Built using React + TypeScript on the frontend and Node.js + Express + MongoDB on the backend.
 
 ---
+
+## ✅ Current Features
+
+### 🧩 Backend (API)
+- Built with **Node.js**, **Express**, and **MongoDB (Mongoose)**
+- RESTful API with full CRUD for products
+- Basic error handling and data validation
+- Clean folder structure with separation of concerns
 
 ## Current Progress
 
@@ -15,6 +23,15 @@ A backend API for an eco-friendly e-commerce platform promoting sustainable prod
   - Delete products
 - Basic validation and error handling.
 - Environment variables configured for sensitive data.
+
+- ### 🎨 Frontend
+- Developed using **React + TypeScript**
+- Product listing with images, names, prices, and descriptions
+- Dynamic routing to individual product pages
+- Responsive layout and clean UI
+- Fetches data from backend API using environment config
+
+---
 
 ---
 
@@ -32,7 +49,6 @@ A backend API for an eco-friendly e-commerce platform promoting sustainable prod
 
 ## Future Plans
 
-- Develop a frontend client application.
 - Add user authentication and authorization.
 - Implement product categories, reviews, and order management.
 - Add testing for API endpoints.
@@ -45,10 +61,5 @@ Contributions are welcome! Feel free to open issues or submit pull requests.
 
 ---
 
-## License
-
-This project is licensed under the MIT License.
-
----
 
 *Thanks for checking out the project! Stay tuned for updates.*
